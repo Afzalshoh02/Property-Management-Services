@@ -14,20 +14,20 @@
 
                 <div class="col-12">
                     <label class="form-label">First Name</label>
-                    <input type="text" name="name" class="form-control" required>
+                    <input type="text" name="name" class="form-control" value="{{ old('name') }}" required>
                     <span style="color: red">{{ $errors->first('name') }}</span>
                     <div class="invalid-feedback">Please, enter your first name!</div>
                 </div>
 
                 <div class="col-12">
                     <label class="form-label">Last Name</label>
-                    <input type="text" name="last_name" class="form-control" >
+                    <input type="text" name="last_name" class="form-control" value="{{ old('last_name') }}">
                     <div class="invalid-feedback">Please, enter your last name!</div>
                 </div>
 
                 <div class="col-12">
                     <label class="form-label">Your Email</label>
-                    <input type="email" name="email" class="form-control" required>
+                    <input type="email" name="email" class="form-control" value="{{ old('email') }}" required>
                     <span style="color: red">{{ $errors->first('email') }}</span>
                     <div class="invalid-feedback">Please enter a valid email adddress!</div>
                 </div>
@@ -35,14 +35,14 @@
                 <div class="col-12">
                     <label class="form-label">Mobile Number</label>
                     <input type="text" name="mobile" class="form-control"
-                        oninput="javascript: this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
-                        maxlength="10">
+                           oninput="javascript: this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                           maxlength="10" value="{{ old('mobile') }}">
                     <div class="invalid-feedback">Please, enter your mobile number!</div>
                 </div>
 
                 <div class="col-12">
                     <label class="form-label">Address</label>
-                    <input type="text" name="address" class="form-control">
+                    <input type="text" name="address" class="form-control" value="{{ old('address') }}">
                     <div class="invalid-feedback">Please, enter your address!</div>
                 </div>
 
