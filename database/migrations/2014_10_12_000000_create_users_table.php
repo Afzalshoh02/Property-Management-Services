@@ -29,8 +29,8 @@ return new class extends Migration
             $table->tinyInteger('status')->default(0)->comment("0:Active,1:Inactive");
             $table->tinyInteger('is_admin')->default(0)->comment("0:User,1:Admin,3:Vendor");
             $table->tinyInteger('is_delete')->default(0)->comment("0:No Deleted,1:Yes Deleted");
-            $table->rememberToken();
             $table->string('forgot_token')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

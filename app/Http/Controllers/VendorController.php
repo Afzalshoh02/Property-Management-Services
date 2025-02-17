@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResetPasswordRequest;
+use App\Mail\VendorRegisterMail;
 use App\Models\Category;
 use App\Models\User;
 use App\Models\Vendortype;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
@@ -13,7 +16,8 @@ class VendorController extends Controller
 {
     public function vendor_list(Request $request)
     {
-        return view('admin.vendor.list');
+        $data['getrecord'] = User::get_record($request);
+        return view('admin.vendor.list',$data);
     }
 
     public function vendor_add(Request $request)
@@ -55,12 +59,36 @@ class VendorController extends Controller
         $user->remember_token = Str::random(50);
         $user->forgot_token = Str::random(50);
         $user->save();
-        $this->sern_vendor_verification_mail($user);
+//        $this->sern_vendor_verification_mail($user);
         return redirect('admin/vendor/list')->with('success', 'Vendor added successfully!');
     }
 
     public function sern_vendor_verification_mail($user)
     {
         Mail::to($user->email)->send(new VendorRegisterMail($user));
+    }
+    public function vendor_password(Request $request, $token)
+    {
+        $user = User::where('forgot_token', '=', $token);
+        if ($user->count() == 0) {
+            abort(403);
+        }
+        $user = $user->first();
+        $data['token'] =  $token;
+        return view('admin.vendor.password', $data);
+    }
+    public function vendor_password_post($token, ResetPasswordRequest $request)
+    {
+        $user = User::where('forgot_token', '=', $token);
+        if ($user->count() === 0) {
+            abort(403);
+        }
+        $user = $user->first();
+        $user->remember_token = Str::random(50);
+        $user->forgot_token = Str::random(50);
+        $user->password = Hash::make($request->password);
+        $user->status = 0;
+        $user->save();
+        return redirect('/')->with('success', 'Password has been save.');
     }
 }

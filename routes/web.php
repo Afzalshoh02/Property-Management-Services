@@ -27,6 +27,9 @@ Route::post('/login_post', [AuthController::class, 'login_post']);
 Route::get('/register', [AuthController::class, 'register']);
 Route::post('/register', [AuthController::class, 'register_post']);
 
+Route::get('vendor/password/{token}', [VendorController::class, 'vendor_password']);
+Route::post('vendor/password/{token}', [VendorController::class, 'vendor_password_post']);
+
 Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/dashboard', [DashboardController::class, 'admin_dashboard']);
     Route::get('admin/amc/list', [AMCController::class, 'amc_list']);
