@@ -4,20 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use function Laravel\Prompts\select;
 
-class AmcFreeService extends Model
+class ServiceType extends Model
 {
     use HasFactory;
-    protected $table = 'amc_free_services';
+    protected $table = 'service_types';
     protected $fillable = [
-        'amc_id', 'name', 'limits', 'price'
+      'name','is_delete'
     ];
-    static public function get_free_service($id)
+    static public function get_record($request)
     {
-        $return = self::select('amc_free_services.*')
-            ->where('amc_id', '=', $id)
-            ->orderBy('id', 'asc');
+        $return = self::select('service_types.*')
+            ->orderBy('service_types.id','desc')
+            ->where('is_delete', '=', 0);
             $return = $return->paginate(10);
         return $return;
     }

@@ -12,7 +12,7 @@
         <li class="nav-heading">Pages</li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link @if(Request::segment(2) == 'vendor') @else collapsed @endif" href="{{ url('admin/vendor/list') }}">
                 <i class="bi bi-person"></i>
                 <span>Vendor List</span>
             </a>
@@ -40,6 +40,20 @@
         </li>
 
         <li class="nav-item">
+            <a class="nav-link @if(Request::segment(2) == 'service_type') @else collapsed @endif" href="{{ url('admin/service_type/list') }}">
+                <i class="bi bi-person"></i>
+                <span>Service Type</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link @if(Request::segment(2) == 'vendor_type') @else collapsed @endif" href="{{ url('admin/vendor_type/list') }}">
+                <i class="bi bi-person"></i>
+                <span>Vendor Type</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
             <a class="nav-link @if(Request::segment(2) == 'category') @else collapsed @endif" href="{{ url('admin/category/list') }}">
                 <i class="bi bi-envelope"></i>
                 <span>Category List</span>
@@ -47,7 +61,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link @if(Request::segment(2) == 'sub_category') @else collapsed @endif" href="{{ url('admin/sub_category/list') }}">
                 <i class="bi bi-envelope"></i>
                 <span>Sub Category List</span>
             </a>

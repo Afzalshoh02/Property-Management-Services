@@ -3,4 +3,5 @@ php artisan migrate
 php artisan migrate:fresh
 download https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template
 
-#15 AMC inside Free Service Edit, Update and Remove -> омадаги
+
+#22 Send mail automatically while creating new vendor минути 10-ум омадаги

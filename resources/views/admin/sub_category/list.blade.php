@@ -2,11 +2,11 @@
 @section('content')
 
     <div class="pagetitle">
-        <h1>Free Service</h1>
+        <h1>Sub Category</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Free Service</li>
+                <li class="breadcrumb-item active">Sub Category</li>
             </ol>
         </nav>
     </div>
@@ -18,31 +18,29 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="{{ url('admin/amc/add_free_service/'.$getrecord->id) }}" class="btn btn-primary">Add New Free Service</a>
+                            <a href="{{ url('admin/sub_category/add') }}" class="btn btn-primary">Add New Sub Category</a>
                         </h5>
 
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
-                                    <th>Limits</th>
-                                    <th>Price</th>
+                                    <th>Category Name</th>
+                                    <th>Sub Category Name</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                            @forelse($get_free_service as $value)
+                            @forelse($getrecord as $value)
                                 <tr>
                                     <td>{{ $value->id }}</td>
+                                    <td>{{ $value->category_name }}</td>
                                     <td>{{ $value->name }}</td>
-                                    <td>{{ $value->limits }}</td>
-                                    <td>{{ number_format($value->price, 2) }}</td>
                                     <td>
-                                        <a href="{{ url('admin/amc/edit_free_service/'. $value->id) }}" class="btn btn-success">
+                                        <a href="{{ url('admin/sub_category/edit/'. $value->id) }}" class="btn btn-success">
                                             <i class="bi bi-pencil-square"></i>
                                         </a>
-                                        <a onclick="return confirm('Are you sure you want to delete?')" href="{{ url('admin/amc/delete_free_service/'.$value->id) }}" class="btn btn-danger">
+                                        <a onclick="return confirm('Are you sure you want to delete?')" href="{{ url('admin/sub_category/delete/'.$value->id) }}" class="btn btn-danger">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     </td>
@@ -54,7 +52,7 @@
                             @endforelse
                             </tbody>
                         </table>
-                        {{ $get_free_service->links() }}
+                        {{ $getrecord->links() }}
                     </div>
                 </div>
             </div>

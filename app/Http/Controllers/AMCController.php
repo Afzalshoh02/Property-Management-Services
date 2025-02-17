@@ -133,4 +133,26 @@ class AMCController extends Controller
         $insert_r->save();
         return redirect('admin/amc/free_service/'.$request->amc_id)->with('success', 'AMC Free Service successfully save');
     }
+    public function amc_edit_free_service($id)
+    {
+        $data['getrecord'] = AmcFreeService::get_single($id);
+        return view('admin.amc.free_service_edit', $data);
+    }
+
+    public function amc_update_free_service($id, Request $request)
+    {
+        $update = AmcFreeService::get_single($id);
+        $update->name = trim($request->name);
+        $update->limits = trim($request->limits);
+        $update->price = trim($request->price);
+        $update->save();
+        return redirect('admin/amc/free_service/'.$update->amc_id)->with('success', 'Free Service Successfully Updated');
+    }
+
+    public function amc_delete_free_service($id, Request $request)
+    {
+        $delete_record = AmcFreeService::get_single($id);
+        $delete_record->delete();
+        return redirect()->back()->with('error', 'Record successfully deleted');
+    }
 }
