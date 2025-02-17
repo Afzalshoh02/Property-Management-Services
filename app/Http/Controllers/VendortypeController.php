@@ -50,6 +50,7 @@ class VendortypeController extends Controller
     {
         $delete = Vendortype::get_single($id);
         $delete->is_delete = 1;
+        $delete->save();
         return redirect('admin/vendor_type/list')->with('success', 'Vendor Type Deleted Successfully');
     }
 }

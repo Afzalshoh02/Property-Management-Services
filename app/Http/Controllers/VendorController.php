@@ -91,4 +91,11 @@ class VendorController extends Controller
         $user->save();
         return redirect('/')->with('success', 'Password has been save.');
     }
+    public function vendor_edit($id, Request $request)
+    {
+        $data['getrecord'] = User::get_single($id);
+        $data['getVendorType'] = VendorType::get_record($request);
+        $data['getCategory'] = Category::get_record($request);
+        return view('admin.vendor.edit', $data);
+    }
 }

@@ -54,4 +54,8 @@ class User extends Authenticatable
         $return = $return->paginate(10);
         return $return;
     }
+    static public function get_single($id)
+    {
+        return self::find($id);
+    }
 }

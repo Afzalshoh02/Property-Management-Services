@@ -77,6 +77,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/vendor/list', [VendorController::class, 'vendor_list']);
     Route::get('admin/vendor/add', [VendorController::class, 'vendor_add']);
     Route::post('admin/vendor/add', [VendorController::class, 'vendor_store']);
+    Route::get('admin/vendor/edit/{id}', [VendorController::class, 'vendor_edit']);
 
     Route::get('admin/vendor_type/list', [VendortypeController::class, 'vendor_type_list']);
     Route::get('admin/vendor_type/add', [VendortypeController::class, 'vendor_type_add']);
