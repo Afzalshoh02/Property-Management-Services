@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AMCController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BookServiceContoller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ServiceTypeController;
@@ -99,6 +100,10 @@ Route::group(['middleware' => 'admin'], function () {
 
 Route::group(['middleware' => 'user'], function () {
     Route::get('user/dashboard', [DashboardController::class, 'user_dashboard']);
+    Route::get('user/book_service/list', [BookServiceContoller::class, 'service_history_list']);
+    Route::get('user/book_service/add', [BookServiceContoller::class, 'book_service_add']);
+    Route::post('user/book_service/sub_category', [BookServiceContoller::class, 'book_service_dropdown']);
+    Route::post('user/book_service/add', [BookServiceContoller::class, 'book_service_store']);
 });
 
 Route::group(['middleware' => 'vendor'], function () {

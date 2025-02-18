@@ -29,4 +29,8 @@ class AMCModel extends Model
     {
         return self::where('is_delete', 0)->get();
     }
+    public function option()
+    {
+        return $this->hasMany(AmcFreeService::class, 'amc_id');
+    }
 }
