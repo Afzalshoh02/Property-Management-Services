@@ -6,6 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ServiceTypeController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
 use App\Http\Controllers\VendortypeController;
 use App\Models\Vendortype;
@@ -78,6 +79,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/vendor/add', [VendorController::class, 'vendor_add']);
     Route::post('admin/vendor/add', [VendorController::class, 'vendor_store']);
     Route::get('admin/vendor/edit/{id}', [VendorController::class, 'vendor_edit']);
+    Route::post('admin/vendor/edit/{id}', [VendorController::class, 'vendor_update']);
+    Route::get('admin/vendor/delete/{id}', [VendorController::class, 'vendor_delete']);
 
     Route::get('admin/vendor_type/list', [VendortypeController::class, 'vendor_type_list']);
     Route::get('admin/vendor_type/add', [VendortypeController::class, 'vendor_type_add']);
@@ -85,6 +88,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/vendor_type/edit/{id}', [VendortypeController::class, 'vendor_type_edit']);
     Route::post('admin/vendor_type/edit/{id}', [VendortypeController::class, 'vendor_type_update']);
     Route::get('admin/vendor_type/delete/{id}', [VendortypeController::class, 'vendor_type_delete']);
+
+    Route::get('admin/user/list', [UserController::class, 'user_list']);
+    Route::get('admin/user/add', [UserController::class, 'user_add']);
+    Route::post('admin/user/add', [UserController::class, 'user_store']);
+    Route::get('admin/user/edit/{id}', [UserController::class, 'user_edit']);
+    Route::post('admin/user/edit/{id}', [UserController::class, 'user_update']);
+    Route::get('admin/user/delete/{id}', [UserController::class, 'user_delete']);
 });
 
 Route::group(['middleware' => 'user'], function () {

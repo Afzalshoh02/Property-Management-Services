@@ -98,4 +98,58 @@ class VendorController extends Controller
         $data['getCategory'] = Category::get_record($request);
         return view('admin.vendor.edit', $data);
     }
+
+    public function vendor_update($id, Request $request)
+    {
+        $insert_r = request()->validate([
+           'name' => 'required',
+           'email' => 'required|unique:users,email,' . $id,
+           'status' => 'required',
+           'category_id' => 'required',
+           'vendor_type_id' => 'required',
+        ]);
+        $insert_r = User::get_single($id);
+        $insert_r->name = trim($request->name);
+        $insert_r->last_name = trim($request->last_name);
+        $insert_r->email = trim($request->email);
+        $insert_r->mobile = trim($request->mobile);
+        if (!empty($request->file('profile'))) {
+            if (!empty($insert_r->profile) && file_exists('uploads/profile/' . $insert_r->profile)) {
+                unlink('uploads/profile/' . $insert_r->profile);
+            }
+            $file = $request->file('profile');
+            $randomStr = Str::random(30);
+            $filename = $randomStr . '.' . $file->getClientOriginalExtension();
+            $file->move('uploads/profile/', $filename);
+            $insert_r->profile = $filename;
+        }
+        $insert_r->category_id = trim($request->category_id);
+        $insert_r->vendor_type_id = trim($request->vendor_type_id);
+        if ($request->vendor_type_id == 2) {
+            $insert_r->company_name = null;
+            $insert_r->employee_id = null;
+        } else if ($request->vendor_type_id == 1) {
+            $insert_r->company_name = trim($request->company_name);
+            $insert_r->employee_id = null;
+        }
+        if ($request->vendor_type_id == 2) {
+            $insert_r->company_name = null;
+            $insert_r->employee_id = null;
+        } else if ($request->vendor_type_id == 3) {
+            $insert_r->employee_id = trim($request->employee_id);
+            $insert_r->company_name = null;
+        }
+        $insert_r->status = trim($request->status);
+        $insert_r->always_assign = trim($request->always_assign);
+        $insert_r->save();
+        return redirect('admin/vendor/list')->with('success', 'Vendor updated successfully!');
+    }
+
+    public function vendor_delete($id, Request $request)
+    {
+        $user = User::get_single($id);
+        $user->is_delete = 1;
+        $user->save();
+        return redirect('admin/vendor/list')->with('success', 'Vendor deleted successfully!');
+    }
 }

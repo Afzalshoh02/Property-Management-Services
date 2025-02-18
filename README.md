@@ -2,6 +2,6 @@ php artisan serve
 php artisan migrate
 php artisan migrate:fresh
 download https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template
-отправка email можно посмотреть через mailltrap.io
+отправка email можно посмотреть через mailtrap.io
 
-#26 Vendor Update and Update ----омадаги
+#32 Form Foreach Loop & Dependent category sub category ----омадаги

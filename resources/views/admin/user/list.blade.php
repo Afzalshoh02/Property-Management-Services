@@ -2,11 +2,11 @@
 @section('content')
 
     <div class="pagetitle">
-        <h1>Vendor List</h1>
+        <h1>User List</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('admin/dashboard') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Vendor</li>
+                <li class="breadcrumb-item active">User</li>
             </ol>
         </nav>
     </div>
@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-lg-12">
 
-{{--                Search Vendor --}}
+                {{--                Search Vendor --}}
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Search Vendor</h3>
@@ -53,7 +53,7 @@
                                     <button class="btn btn-primary" type="submit" style="margin-top: 30px;">
                                         Search
                                     </button>
-                                    <a href="{{ url('admin/vendor/list') }}" class="btn btn-success" style="margin-top: 30px;">
+                                    <a href="{{ url('admin/user/list') }}" class="btn btn-success" style="margin-top: 30px;">
                                         Reset
                                     </a>
                                 </div>
@@ -67,7 +67,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="{{ url('admin/vendor/add') }}" class="btn btn-primary">Add New Vendor</a>
+                            <a href="{{ url('admin/user/add') }}" class="btn btn-primary">Add New User</a>
                         </h5>
                         <div class="table-responsive">
                             <table class="table">
@@ -79,12 +79,6 @@
                                     <th>Email</th>
                                     <th>Mobile</th>
                                     <th>Profile</th>
-                                    <th>Vendor Type Name</th>
-                                    <th>Company Name</th>
-                                    <th>Employee ID</th>
-                                    <th>Category Name</th>
-                                    <th>Always Assign</th>
-                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                                 </thead>
@@ -98,37 +92,17 @@
                                         <td>{{ $value->mobile }}</td>
                                         <td>
                                             @if(!empty($value->profile))
-                                                @if(file_exists('uploads/profile/'.$value->profile))
-                                                    <img src="{{ url('uploads/profile/'.$value->profile) }}"
-                                                         style="height: 50px; width: 50px;">
-                                                @endif
-                                            @endif
-                                        </td>
-                                        <td>{{ !empty($value->vendor_type_name) ? $value->vendor_type_name : '' }}</td>
-                                        <td>{{ $value->company_name }}</td>
-                                        <td>{{ $value->employee_id }}</td>
-                                        <td>{{ !empty($value->category_name) ? $value->category_name : '' }}</td>
-                                        <td>
-                                            @if($value->always_assign == 1)
-                                                Yes
-                                            @else
-                                                No
+                                                <img src="{{ $value->getImage() }}"
+                                                     style="height: 50px; width: 50px;">
                                             @endif
                                         </td>
                                         <td>
-                                            @if($value->status == 1)
-                                                InActive
-                                            @else
-                                                Active
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ url('admin/vendor/edit/'. $value->id) }}"
+                                            <a href="{{ url('admin/user/edit/'. $value->id) }}"
                                                class="btn btn-success">
                                                 <i class="bi bi-pencil-square"></i>
                                             </a>
                                             <a onclick="return confirm('Are you sure you want to delete?')"
-                                               href="{{ url('admin/vendor/delete/'.$value->id) }}"
+                                               href="{{ url('admin/user/delete/'.$value->id) }}"
                                                class="btn btn-danger">
                                                 <i class="bi bi-trash"></i>
                                             </a>

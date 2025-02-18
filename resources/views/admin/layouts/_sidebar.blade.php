@@ -19,7 +19,7 @@
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="">
+            <a class="nav-link @if(Request::segment(2) == 'user') @else collapsed @endif" href="{{ url('admin/user/list') }}">
                 <i class="bi bi-person"></i>
                 <span>User List</span>
             </a>

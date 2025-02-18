@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Request;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -51,11 +52,64 @@ class User extends Authenticatable
             ->orderBy('users.id','desc')
             ->where('users.is_admin','=', 2)
             ->where('users.is_delete','=', 0);
+        if (!empty(Request::get('id'))) {
+            $return = $return->where('users.id', '=', Request::get('id'));
+        }
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+        }
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
+        }
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+        }
+        if (!empty(Request::get('mobile'))) {
+            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile') . '%');
+        }
         $return = $return->paginate(10);
         return $return;
     }
     static public function get_single($id)
     {
         return self::find($id);
+    }
+    static public function get_record_user($request)
+    {
+        $return = self::select('users.*')
+            ->orderBy('users.id','desc')
+            ->where('users.is_admin','=', 0)
+            ->where('users.is_delete','=', 0);
+        if (!empty(Request::get('id'))) {
+            $return = $return->where('users.id', '=', Request::get('id'));
+        }
+        if (!empty(Request::get('name'))) {
+            $return = $return->where('users.name', 'like', '%' . Request::get('name') . '%');
+        }
+        if (!empty(Request::get('last_name'))) {
+            $return = $return->where('users.last_name', 'like', '%' . Request::get('last_name') . '%');
+        }
+        if (!empty(Request::get('email'))) {
+            $return = $return->where('users.email', 'like', '%' . Request::get('email') . '%');
+        }
+        if (!empty(Request::get('mobile'))) {
+            $return = $return->where('users.mobile', 'like', '%' . Request::get('mobile') . '%');
+        }
+            $return = $return->paginate(10);
+        return $return;
+    }
+        //@if(!empty($value->profile))
+        //@if(file_exists('uploads/profile/'.$value->profile))
+        //<img src="{{ url('uploads/profile/'.$value->profile) }}"
+        //style="height: 50px; width: 50px;">
+        //@endif
+        //@endif
+    public function getImage()
+    {
+        if (!empty($this->profile) && file_exists('uploads/profile/' . $this->profile)) {
+            return url('uploads/profile/' . $this->profile);
+        } else {
+            return "";
+        }
     }
 }

@@ -20,7 +20,10 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->integer('vendor_type_id')->nullable();
             $table->string('employee_id')->nullable();
+            $table->string('amc_id')->nullable();
+            $table->string('amc_business_category_name')->nullable();
             $table->integer('category_id')->nullable();
+            $table->string('account_number')->nullable();
             $table->string('always_assign')->nullable();
             $table->string('company_name')->nullable();
             $table->string('profile')->nullable();
