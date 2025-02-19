@@ -48,6 +48,16 @@
    php artisan serve
    ```
 
+## Admin
+- **Login**: admin@example.com
+- **Password**: password
+## User
+- **Login**: user@example.com
+- **Password**: password
+## Vendor
+- **Login**: vendor@example.com
+- **Password**: password
+
 ## Разработка и участие
 Pull-реквесты приветствуются! Перед отправкой изменений убедитесь, что код проходит все тесты.
 
